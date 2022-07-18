@@ -1,3 +1,1 @@
-# EpamMusic
-
-wiki to gitflow - https://git.epam.com/roman_habovskyi/epammusic/-/wikis/Gitflow
+Epam Music - create the application that will allow me and my friends to create public/private, personal/shared playlists and manage the songs inside it. This application should be accessible for authenticated and guest users. Also, as main administrator I want to manage platform users, playlists, music, and other stuff on platform.
