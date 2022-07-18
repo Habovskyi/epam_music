@@ -1,0 +1,1191 @@
+{
+	"info": {
+		"_postman_id": "81b2447c-05a3-44af-b80d-0d9b2ea72576",
+		"name": "General collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Session",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "email@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "sTroNgPa$$Word",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/sessions",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "email@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Username",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "sTroNgPa$$Word",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "sTroNgPa$$Word",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Doe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/sign_up",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grand_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwuY29tIiwiZXhwIjoxNjUzNDAzOTQyfQ.c7ZxfyhiHxymPTm-VTdKrgNTLdTI1JeEy6XNGvS6tyQ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/sessions",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "current_user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/current_user",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"current_user"
+							]
+						},
+						"description": "get current user info"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAxZGI1MmYtZWI0Yy00YmZhLWI2N2ItNjVmOGUyMGUzZjQ0IiwiZXhwIjoxNjUxMTc5NDM4fQ.AGiupmBSnnelRS3xxY2vlRFFzS8TXI6uknCxkSl7bRU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "Test_user",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Joe",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Doe",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/Users/alinka/projects/epammusic/spec/fixtures/avatar/test_avatar.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/current_user",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"current_user"
+							]
+						},
+						"description": "Update current user info"
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYzExMzE5ZTEtNzMwNy00ZWU0LWExMGYtNTFjOWE4ODgwMTlmIiwiZXhwIjoxNjUwMzE0MDAwfQ.SdGoZXNxuZU8bbSrZmU5yrMeVhIzCH3rSWnUKojoZjM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/users/:id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1a4619a0-e0b4-4044-9049-98c0fcb711c6"
+								}
+							]
+						},
+						"description": "Get user info"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/current_user",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"current_user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "Reactions",
+					"item": [
+						{
+							"name": "Create reaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYTEyY2NhMDYtMzgwOC00Yjk2LWFlMDctNzI3NmU4Nzg3MTE5IiwiZXhwIjoxNjUzNjY2NjM3fQ.5SsKqYlBvHv3NaAweoUhoxx7vUOZ5rU618Xu9JLAjaM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "reaction_type",
+											"value": "liked",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/playlists/c7878509-369a-4791-9200-600f08735c31/reactions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"playlists",
+										"c7878509-369a-4791-9200-600f08735c31",
+										"reactions"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/playlists/:id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"playlists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "515705a2-30fb-4829-b3a4-e8c982236b07"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "Best description",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "New title",
+									"type": "text"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/home/roman/RubyLab/epammusic/spec/fixtures/logo/test_logo.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/playlists/:id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"playlists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "515705a2-30fb-4829-b3a4-e8c982236b07"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Description",
+									"type": "text"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/home/roman/RubyLab/epammusic/spec/fixtures/logo/test_logo.png"
+								},
+								{
+									"key": "visibility",
+									"value": "general",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/playlists",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTAxZGI1MmYtZWI0Yy00YmZhLWI2N2ItNjVmOGUyMGUzZjQ0IiwiZXhwIjoxNjUwNTc5NTI1fQ.REtRfax7zPF-o7qvVnq_dPpbuUMxnh63n2D9VsnLNHw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/api/v1/playlists/:id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"playlists",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "080d981e-5079-48ca-b705-6d4b75460528"
+								}
+							]
+						},
+						"description": "Delete playlist"
+					},
+					"response": []
+				},
+				{
+					"name": "Public playlists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/playlists?sort_order=desc&sort_by=comments_count&s=ab&page=1&includes[]=limited_songs&includes[]=user&includes[]=limited_songs.author&includes[]=limited_songs.album&includes[]=limited_songs.genre",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "sort_order",
+									"value": "desc"
+								},
+								{
+									"key": "sort_by",
+									"value": "comments_count"
+								},
+								{
+									"key": "s",
+									"value": "ab"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "includes[]",
+									"value": "limited_songs"
+								},
+								{
+									"key": "includes[]",
+									"value": "user"
+								},
+								{
+									"key": "includes[]",
+									"value": "limited_songs.author"
+								},
+								{
+									"key": "includes[]",
+									"value": "limited_songs.album"
+								},
+								{
+									"key": "includes[]",
+									"value": "limited_songs.genre"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User playlists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/user/playlists?includes[]=songs&includes[]=songs.albums",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"playlists"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "shared",
+									"disabled": true
+								},
+								{
+									"key": "includes[]",
+									"value": "songs"
+								},
+								{
+									"key": "includes[]",
+									"value": "songs.albums"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Playlist songs",
+			"item": [
+				{
+					"name": "Delete song",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/playlists/:playlist_id/songs/:id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"playlists",
+								":playlist_id",
+								"songs",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "playlist_id",
+									"value": "b36c2a34-898d-477f-b590-04a0eda37df5"
+								},
+								{
+									"key": "id",
+									"value": "515705a2-30fb-4829-b3a4-e8c982236b07"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create playlist song",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZDI5OWVmMTctYjVmMi00Y2M4LThhMGItZjg1ODY4YjlmZjg3IiwiZXhwIjoxNjUyOTcyMzY0fQ.LhMNkxBL0H6OsKKUSj5Rlg5JWfL8FhKX0ztzcszXxz0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "song_id",
+									"value": "c6d7ea77-5493-4651-8205-fbd0d8ae7850",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/playlists/:playlist_id/songs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"playlists",
+								":playlist_id",
+								"songs"
+							],
+							"variable": [
+								{
+									"key": "playlist_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get paginated songs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "includes[]",
+									"value": "song",
+									"type": "text"
+								},
+								{
+									"key": "includes[]",
+									"value": "song.author",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/playlists/:playlist_id/songs?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"playlists",
+								":playlist_id",
+								"songs"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "playlist_id",
+									"value": "b36c2a34-898d-477f-b590-04a0eda37df5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "My comment",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/playlists/:playlist_id/comments",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"playlists",
+								":playlist_id",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "playlist_id",
+									"value": "4e03bb81-f1c7-49d9-9c1c-06e19804f1f9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/playlists/:playlist_id/comments?page=1&includes[]=user&includes[]=playlist",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"playlists",
+								":playlist_id",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "includes[]",
+									"value": "user"
+								},
+								{
+									"key": "includes[]",
+									"value": "playlist"
+								}
+							],
+							"variable": [
+								{
+									"key": "playlist_id",
+									"value": "16659ef3-7522-491d-961a-9f3412dd2979"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Friendships",
+			"item": [
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/user/friendships/:id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"friendships",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7f00bcd8-a156-421b-a412-98f287ac0b2c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_to_id",
+									"value": "43ca8459-3e9f-4018-8502-bc1800992c0f",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/user/friendships",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"friendships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept/decline",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "status",
+									"value": "accepted",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/user/friendships/:id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"friendships",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6f761a86-fbe0-4060-9834-a39bb8a4a4ab"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Friends",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/user/friends",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"friends"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pending",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMDRjMDcwYWQtYjU0Ny00MTAwLWJlNTEtY2RlYzZlZGUzMjI1IiwiZXhwIjoxNjUyMjY0MjQ0fQ.W3_58rGEA6GXa9T-bEtDGmcgGWruTWHY8QacGXZpRQg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/api/v1/user/friendships",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"friendships"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Songs",
+			"item": [
+				{
+					"name": "Search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "search_word",
+									"value": "ab2",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/v1/songs",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"songs"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Home",
+			"item": [
+				{
+					"name": "home songs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/songs/:type",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"songs",
+								":type"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "latest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "home_users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/home_users?type=most_friendly",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"home_users"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "most_friendly"
+								},
+								{
+									"key": "type",
+									"value": "best_contributors",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "home_playlists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/home_playlists?type=popular&type=featured&type=latest",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"home_playlists"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "popular",
+									"description": "top 5 Most popular public playlists"
+								},
+								{
+									"key": "type",
+									"value": "featured",
+									"description": "5 featured public playlists"
+								},
+								{
+									"key": "type",
+									"value": "latest",
+									"description": "5 latest added to platform public playlists"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "About",
+			"item": [
+				{
+					"name": "About",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/api/v1/abouts",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"abouts"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYzRjNjYxZDctMmEwYy00ZWI3LWFkNWUtZTAwYTZiMWM2MDYwIiwiZXhwIjoxNjUzMzIyMTQ0fQ.etIdN_YTV-oeEModGjGOHFeU4aLNt6z63fy7oZNQny4",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "815cc677-1741-4c54-b012-769b90ec6595",
+			"key": "host",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

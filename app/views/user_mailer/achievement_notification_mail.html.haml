@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      =I18n.t('action_mailer.users.greeting', username: @user.username)
+    %p
+      =I18n.t('action_mailer.users.got_achievement', playlists_created: @user.playlists_created)

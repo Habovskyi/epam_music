@@ -1,0 +1,1939 @@
+---
+swagger: '2.0'
+info:
+  title: EpamMusic API
+  version: v1
+definitions:
+  user_sign_up:
+    type: object
+    required:
+    - email
+    - username
+    - password
+    - password_confirmation
+    properties:
+      email:
+        type: string
+        example: email@mail.com
+      username:
+        type: string
+        example: Username
+      password:
+        type: string
+        example: sTroNgPa$$Word
+      password_confirmation:
+        type: string
+        example: sTroNgPa$$Word
+      first_name:
+        type: string
+        example: John
+      last_name:
+        type: string
+        example: Doe
+  home_users:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          "$ref": "#/definitions/user"
+  search_new_user:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          "$ref": "#/definitions/user"
+  user:
+    type: object
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+      attributes:
+        type: object
+        properties:
+          username:
+            type: string
+          email:
+            type: string
+          first_name:
+            type: string
+          last_name:
+            type: string
+          playlists_created:
+            type: integer
+      included:
+        type: object
+  home_playlists:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          "$ref": "#/definitions/playlist"
+  playlist:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            minLength: 1
+          type:
+            type: string
+            minLength: 1
+          attributes:
+            type: object
+            properties:
+              title:
+                type: string
+                minLength: 1
+              visibility:
+                type: string
+                minLength: 1
+              featured:
+                type: boolean
+                not:
+                  type: 'null'
+              created_at:
+                type: string
+                format: date
+                minLength: 1
+              logo:
+                type: object
+                properties:
+                  small:
+                    type: string
+                    minLength: 1
+                  large:
+                    type: string
+                    minLength: 1
+                required:
+                - small
+                - large
+              description:
+                type: string
+                minLength: 1
+            required:
+            - title
+            - visibility
+            - featured
+            - created_at
+            - logo
+            - description
+          relationships:
+            type: object
+            properties:
+              songs:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                required:
+                - data
+              owner:
+                type: object
+                properties:
+                  data:
+                    type: object
+                required:
+                - data
+            required:
+            - songs
+            - owner
+          meta:
+            type: object
+            properties:
+              comments_count:
+                type: integer
+                not:
+                  type: 'null'
+              songs_count:
+                type: integer
+                not:
+                  type: 'null'
+              likes_count:
+                type: integer
+                not:
+                  type: 'null'
+              dislikes_count:
+                type: integer
+                not:
+                  type: 'null'
+            required:
+            - comments_count
+            - songs_count
+            - likes_count
+            - dislikes_count
+        required:
+        - id
+        - type
+        - attributes
+        - relationships
+        - meta
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  public_playlists:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
+            attributes:
+              type: array
+              items:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 1
+                  visibility:
+                    type: string
+                    minLength: 1
+                  featured:
+                    type: boolean
+                    not:
+                      type: 'null'
+                  created_at:
+                    type: string
+                    format: date
+                    minLength: 1
+                  logo:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        small:
+                          type: string
+                          minLength: 1
+                        large:
+                          type: string
+                          minLength: 1
+                      required:
+                      - small
+                      - large
+                  description:
+                    type: string
+                    minLength: 1
+                required:
+                - title
+                - visibility
+                - featured
+                - created_at
+                - logo
+                - description
+            relationships:
+              type: array
+              items:
+                type: object
+                properties:
+                  songs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          items:
+                            type: object
+                      required:
+                      - data
+                  owner:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: object
+                      required:
+                      - data
+                required:
+                - songs
+                - owner
+            meta:
+              type: array
+              items:
+                type: object
+                properties:
+                  comments_count:
+                    type: integer
+                    not:
+                      type: 'null'
+                  songs_count:
+                    type: integer
+                    not:
+                      type: 'null'
+                  likes_count:
+                    type: integer
+                    not:
+                      type: 'null'
+                  dislikes_count:
+                    type: integer
+                    not:
+                      type: 'null'
+                required:
+                - comments_count
+                - songs_count
+                - likes_count
+                - dislikes_count
+          required:
+          - id
+          - type
+          - attributes
+          - relationships
+          - meta
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  friendship:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            minLength: 1
+          type:
+            type: string
+            minLength: 1
+          attributes:
+            type: object
+            properties:
+              status:
+                type: string
+                minLength: 1
+            required:
+            - status
+          relationships:
+            type: object
+            properties:
+              user_from:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                    required:
+                    - id
+                    - type
+                required:
+                - data
+              user_to:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                    required:
+                    - id
+                    - type
+                required:
+                - data
+            required:
+            - user_from
+            - user_to
+        required:
+        - id
+        - type
+        - attributes
+        - relationships
+    required:
+    - data
+  list_invitations:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
+            attributes:
+              type: array
+              items:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  incoming:
+                    type: boolean
+                    not:
+                      type: 'null'
+                required:
+                - status
+                - incoming
+            relationships:
+              type: array
+              items:
+                type: object
+                properties:
+                  user_from:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                minLength: 1
+                              type:
+                                type: string
+                                minLength: 1
+                            required:
+                            - id
+                            - type
+                      required:
+                      - data
+                  user_to:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                minLength: 1
+                              type:
+                                type: string
+                                minLength: 1
+                            required:
+                            - id
+                            - type
+                      required:
+                      - data
+                required:
+                - user_from
+                - user_to
+          required:
+          - id
+          - type
+          - attributes
+          - relationships
+    required:
+    - data
+  friends:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
+            attributes:
+              type: array
+              items:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    minLength: 1
+                  email:
+                    type: string
+                    minLength: 1
+                  first_name:
+                    type: string
+                    minLength: 1
+                  last_name:
+                    type: string
+                    minLength: 1
+                  avatar:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        small:
+                          type: string
+                          minLength: 1
+                        large:
+                          type: string
+                          minLength: 1
+                      required:
+                      - small
+                      - large
+                required:
+                - username
+                - email
+                - first_name
+                - last_name
+                - avatar
+          required:
+          - id
+          - type
+          - attributes
+    required:
+    - data
+  playlist_songs:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
+            relationships:
+              type: array
+              items:
+                type: object
+                properties:
+                  song:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                minLength: 1
+                              type:
+                                type: string
+                                minLength: 1
+                            required:
+                            - id
+                            - type
+                      required:
+                      - data
+                required:
+                - song
+          required:
+          - id
+          - type
+          - relationships
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  playlist_song:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            minLength: 1
+          type:
+            type: string
+            minLength: 1
+          relationships:
+            type: object
+            properties:
+              song:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                    required:
+                    - id
+                    - type
+                required:
+                - data
+            required:
+            - song
+        required:
+        - id
+        - type
+        - relationships
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  playlist_songs_shared:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
+            relationships:
+              type: array
+              items:
+                type: object
+                properties:
+                  user:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                minLength: 1
+                              type:
+                                type: string
+                                minLength: 1
+                            required:
+                            - id
+                            - type
+                      required:
+                      - data
+                required:
+                - user
+          required:
+          - id
+          - type
+          - relationships
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  playlist_song_shared:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            minLength: 1
+          type:
+            type: string
+            minLength: 1
+          relationships:
+            type: object
+            properties:
+              user:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                    required:
+                    - id
+                    - type
+                required:
+                - data
+            required:
+            - user
+        required:
+        - id
+        - type
+        - relationships
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  playlist_comment:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            minLength: 1
+          type:
+            type: string
+            minLength: 1
+          attributes:
+            type: object
+            properties:
+              text:
+                type: string
+                minLength: 1
+            required:
+            - text
+          relationships:
+            type: object
+            properties:
+              playlist:
+                type: object
+                properties:
+                  data:
+                    type: object
+                required:
+                - data
+              user:
+                type: object
+                properties:
+                  data:
+                    type: object
+                required:
+                - data
+            required:
+            - playlist
+            - user
+        required:
+        - id
+        - type
+        - attributes
+        - relationships
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  list_comments:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
+            attributes:
+              type: array
+              items:
+                type: object
+                properties:
+                  text:
+                    type: string
+                    minLength: 1
+                required:
+                - text
+            relationships:
+              type: array
+              items:
+                type: object
+                properties:
+                  playlist:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: object
+                      required:
+                      - data
+                  user:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: object
+                      required:
+                      - data
+                required:
+                - playlist
+                - user
+          required:
+          - id
+          - type
+          - attributes
+          - relationships
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  about_text:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            minLength: 1
+          type:
+            type: string
+            minLength: 1
+          attributes:
+            type: object
+            properties:
+              body:
+                type: string
+                minLength: 1
+            required:
+            - body
+        required:
+        - id
+        - type
+        - attributes
+    required:
+    - data
+  home_song:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
+            attributes:
+              type: array
+              items:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 1
+                  count_listening:
+                    type: integer
+                    not:
+                      type: 'null'
+                  created_at:
+                    type: string
+                    format: date
+                    minLength: 1
+                required:
+                - title
+                - count_listening
+                - created_at
+            relationships:
+              type: array
+              items:
+                type: object
+                properties:
+                  genre:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                minLength: 1
+                              type:
+                                type: string
+                                minLength: 1
+                            required:
+                            - id
+                            - type
+                      required:
+                      - data
+                required:
+                - genre
+          required:
+          - id
+          - type
+          - attributes
+          - relationships
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  reaction:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            minLength: 1
+          type:
+            type: string
+            minLength: 1
+          attributes:
+            type: object
+            properties:
+              reaction_type:
+                type: string
+                minLength: 1
+            required:
+            - reaction_type
+          relationships:
+            type: object
+            properties:
+              playlist:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                      type:
+                        type: string
+                        minLength: 1
+                    required:
+                    - id
+                    - type
+                required:
+                - data
+            required:
+            - playlist
+        required:
+        - id
+        - type
+        - attributes
+        - relationships
+      included:
+        type: array
+        items:
+          type: object
+    required:
+    - data
+  tokens_response:
+    type: object
+    properties:
+      access_token:
+        type: string
+        example: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYTg1ZDYyZGItZmI2Yi00ZDFmLWE0YzMtYWQzZWJlNzljNTA3IiwiZXhwIjoxNjUwNDQ3NTQxfQ.isDdAc1Pblp-hXIgNXC_aSkmG9zHjLQrkQ7etNXFCiM
+      refresh_token:
+        type: string
+        example: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYTg1ZDYyZGItZmI2Yi00ZDFmLWE0YzMtYWQzZWJlNzljNTA3IiwiZXhwIjoxNjUwNDQ3NTQxfQ.isDdAc1Pblp-hXIgNXC_aSkmG9zHjLQrkQ7etNXFCiM
+      access_exp:
+        type: string
+        example: '2022-04-19T16:45:41.429Z'
+      refresh_exp:
+        type: string
+        example: '2022-04-20T16:15:41.429Z'
+  user_response:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: string
+            example: c11319e1-7307-4ee4-a10f-51c9a888019f
+          type:
+            type: string
+            example: user
+          attributes:
+            type: object
+            properties:
+              username:
+                type: string
+                example: Testtest
+              email:
+                type: string
+                example: email@mail.com
+              first_name:
+                type: string
+                example: John
+              last_name:
+                type: string
+                example: Doe
+              avatar:
+                type: object
+                properties:
+                  large:
+                    type: string
+                    example: "/uploads/store/0f798cbb8c19761601fbef6b6028aef4.png"
+                  small:
+                    type: string
+                    example: "/uploads/store/f1aadd51b1c0854236d6c282d9460724.png"
+  search_songs:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          "$ref": "#/definitions/song"
+  song:
+    type: object
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+      attributes:
+        type: object
+        properties:
+          title:
+            type: string
+      relationships:
+        type: object
+        properties:
+          author:
+            type: object
+          album:
+            type: object
+          genre:
+            type: object
+      included:
+        type: object
+securityDefinitions:
+  Bearer:
+    description: Bearer token
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  "/api/v1/abouts":
+    get:
+      summary: actually about
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - about
+      responses:
+        '200':
+          description: successful
+          schema:
+            anyOf:
+            - "$ref": "#/definitions/about_text"
+            - {}
+        '204':
+          description: no_content
+  "/api/v1/playlists/{playlist_id}/comments":
+    parameters:
+    - name: playlist_id
+      in: path
+      type: string
+      description: playlist_id
+      required: true
+    get:
+      summary: playlist comments
+      produces:
+      - application/json
+      tags:
+      - comments
+      security:
+      - Bearer: []
+      parameters:
+      - name: includes[]
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          enum:
+          - user
+          - playlist
+        required: false
+      responses:
+        '200':
+          description: success
+          schema:
+            anyOf:
+            - "$ref": "#/definitions/list_comments"
+            - {}
+        '403':
+          description: forbidden
+        '404':
+          description: not found
+    post:
+      summary: create comment
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      tags:
+      - comments
+      security:
+      - Bearer: []
+      parameters:
+      - name: text
+        in: formData
+        type: string
+        required: true
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: successful
+          schema:
+            anyOf:
+            - "$ref": "#/definitions/playlist_comment"
+            - {}
+        '422':
+          description: unprocessable_entity
+        '403':
+          description: access denied
+  "/api/v1/current_user":
+    get:
+      summary: current user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - user
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+          schema:
+            "$ref": "#/definitions/user_response"
+        '401':
+          description: unauthorized
+    put:
+      summary: update current_user
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      tags:
+      - user
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+      - name: first_name
+        in: formData
+        type: string
+        required: false
+      - name: last_name
+        in: formData
+        type: string
+        required: false
+      - name: username
+        in: formData
+        type: string
+        required: false
+      - name: avatar
+        in: formData
+        type: file
+        required: false
+      responses:
+        '200':
+          description: successful
+          schema:
+            "$ref": "#/definitions/user_response"
+        '401':
+          description: unauthorized
+    delete:
+      summary: user
+      tags:
+      - user
+      security:
+      - Bearer: []
+      responses:
+        '204':
+          description: successful
+  "/api/v1/home_users":
+    parameters:
+    - name: type
+      in: query
+      type: enum
+      description: type
+      schema:
+        type: string
+        enum:
+        - most_friendly
+        - best_contributors
+    get:
+      summary: users_info home
+      tags:
+      - home
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/home_users"
+        '400':
+          description: bad request
+  "/api/v1/home_playlists":
+    parameters:
+    - name: type
+      in: query
+      type: enum
+      description: type
+      schema:
+        type: string
+        enum:
+        - featured
+        - latest_added
+        - popular
+    get:
+      summary: playlists_info home
+      tags:
+      - home
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/home_playlists"
+        '400':
+          description: bad request
+  "/api/v1/songs/{type}":
+    parameters:
+    - name: type
+      in: path
+      type: string
+      description: type
+      required: true
+    get:
+      summary: songs home
+      tags:
+      - songs
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            anyOf:
+            - "$ref": "#/definitions/home_song"
+            - {}
+        '400':
+          description: bad request
+  "/api/v1/playlists/{playlist_id}/songs":
+    parameters:
+    - name: playlist_id
+      in: path
+      type: string
+      description: playlist_id
+      required: true
+    get:
+      summary: playlist songs
+      tags:
+      - playlist_songs
+      security:
+      - Bearer: []
+      parameters:
+      - name: includes[]
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          enum:
+          - song
+          - song.author
+          - song.album
+          - song.genre
+          - user
+        required: false
+      responses:
+        '200':
+          description: successful
+          schema:
+            anyOf:
+            - "$ref": "#/definitions/playlist_songs"
+            - {}
+        '403':
+          description: access denied
+        '404':
+          description: not found
+    post:
+      summary: create playlist_song
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - playlist_songs
+      security:
+      - Bearer: []
+      parameters:
+      - name: playlist_id
+        in: path
+        type: string
+        required: true
+      - name: playlist_song
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            song_id:
+              type: string
+          required:
+          - song_id
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: success
+          schema:
+            anyOf:
+            - "$ref": "#/definitions/playlist_song"
+            - {}
+        '404':
+          description: not found
+        '400':
+          description: bad request
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+  "/api/v1/playlists/{playlist_id}/songs/{id}":
+    delete:
+      summary: delete playlist_songs
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - playlist_songs
+      parameters:
+      - name: playlist_id
+        in: path
+        type: string
+        description: playlist id
+        required: true
+      - name: id
+        in: path
+        type: string
+        description: song id
+        required: true
+      security:
+      - Bearer: []
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: not found
+        '401':
+          description: unauthorized
+  "/api/v1/playlists/{id}":
+    parameters:
+    - name: id
+      in: path
+      type: string
+      description: id
+      required: true
+    get:
+      summary: show playlist
+      tags:
+      - playlists
+      security:
+      - Bearer: []
+      parameters:
+      - name: includes[]
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          enum:
+          - user
+          - songs
+          - songs.author
+          - songs.album
+          - songs.genre
+        required: false
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/playlist"
+        '403':
+          description: access denied
+        '404':
+          description: not found
+    put:
+      summary: update playlist
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      tags:
+      - playlists
+      security:
+      - Bearer: []
+      parameters:
+      - name: title
+        in: formData
+        type: string
+        required: false
+      - name: description
+        in: formData
+        type: string
+        required: false
+      - name: visibility
+        in: formData
+        type: string
+        required: false
+      - name: logo
+        in: formData
+        type: file
+        required: false
+      responses:
+        '401':
+          description: access denied
+        '200':
+          description: success
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+        '400':
+          description: bad request
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+        '403':
+          description: access denied
+        '404':
+          description: record not found
+    delete:
+      summary: delete playlist
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - playlists
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+      responses:
+        '204':
+          description: no content
+        '403':
+          description: forbidden
+        '404':
+          description: not found
+        '401':
+          description: unauthorized
+  "/api/v1/playlists":
+    get:
+      summary: general playlist
+      parameters:
+      - name: sort_order
+        in: query
+        schema:
+          type: string
+      - name: sort_by
+        in: query
+        description: Field to be sorted by
+        schema:
+          type: string
+      - name: s
+        in: query
+        description: Search parameter
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: includes[]
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          enum:
+          - user
+          - limited_songs
+          - limited_songs.author
+          - limited_songs.album
+          - limited_songs.genre
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - playlists
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/public_playlists"
+    post:
+      summary: create playlist
+      consumes:
+      - multipart/form-data
+      tags:
+      - playlists
+      security:
+      - Bearer: []
+      parameters:
+      - name: title
+        in: formData
+        type: string
+        required: true
+      - name: description
+        in: formData
+        type: string
+        required: false
+      - name: visibility
+        in: formData
+        type: string
+        required: false
+      - name: logo
+        in: formData
+        type: file
+        required: false
+      responses:
+        '401':
+          description: unauthorized
+        '201':
+          description: created
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+        '400':
+          description: bad request
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+  "/api/v1/playlists/{playlist_id}/reactions":
+    parameters:
+    - name: playlist_id
+      in: path
+      type: string
+      description: Playlist id
+      required: true
+    post:
+      summary: create reaction
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: reaction_type
+        type: string
+        in: formData
+        required: true
+      tags:
+      - reactions
+      security:
+      - Bearer: []
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: success
+          schema:
+            anyOf:
+            - "$ref": "#/definitions/reaction"
+            - {}
+        '404':
+          description: unauthorized
+  "/api/v1/sessions":
+    post:
+      summary: login user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - sessions
+      security:
+      - Bearer: []
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+            password:
+              type: string
+          required:
+          - email
+          - password
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/tokens_response"
+        '401':
+          description: Unauthorized
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    put:
+      summary: refresh_token session
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      tags:
+      - sessions
+      parameters:
+      - name: grand_type
+        in: formData
+        type: string
+        required: true
+      - name: refresh_token
+        in: formData
+        type: string
+        required: true
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/tokens_response"
+        '401':
+          description: Invalid token
+  "/api/v1/sign_up":
+    post:
+      summary: sign_up user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - sessions
+      security:
+      - Bearer: []
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/user_sign_up"
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/tokens_response"
+        '400':
+          description: Bad Request
+        '403':
+          description: Already logged_in
+  "/api/v1/songs":
+    parameters:
+    - name: search_word
+      in: query
+      description: Search parameter
+      schema:
+        type: string
+      required: false
+    - name: page
+      in: query
+      schema:
+        type: integer
+      required: false
+    - name: includes[]
+      in: query
+      type: array
+      collectionFormat: multi
+      items:
+        type: string
+        enum:
+        - author
+        - album
+        - genre
+      required: false
+    get:
+      summary: search songs
+      produces:
+      - application/json
+      tags:
+      - songs
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/search_songs"
+  "/api/v1/user/friends":
+    get:
+      summary: list of friends
+      produces:
+      - application/json
+      tags:
+      - friendships
+      security:
+      - Bearer: []
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: success
+          schema:
+            anyOf:
+            - "$ref": "#/definitions/friends"
+            - {}
+  "/api/v1/user/friendships":
+    get:
+      summary: list invitation
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - friendships
+      security:
+      - Bearer: []
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: success
+          schema:
+            type: object
+            anyOf:
+            - "$ref": "#/definitions/list_invitations"
+            - {}
+    post:
+      summary: create friendship
+      consumes:
+      - multipart/form-data
+      tags:
+      - friendships
+      security:
+      - Bearer: []
+      parameters:
+      - name: user_to_id
+        in: formData
+        required: true
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: success
+          schema:
+            type: object
+            "$ref": "#/definitions/friendship"
+        '400':
+          description: bad_request
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+  "/api/v1/user/friendships/{id}":
+    parameters:
+    - name: id
+      in: path
+      type: string
+      required: true
+    put:
+      summary: update friendship
+      consumes:
+      - multipart/form-data
+      tags:
+      - friendships
+      security:
+      - Bearer: []
+      responses:
+        '401':
+          description: Forbidden
+        '204':
+          description: updated
+        '404':
+          description: not found
+    delete:
+      summary: delete friendship
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - friendships
+      security:
+      - Bearer: []
+      responses:
+        '204':
+          description: no content
+        '404':
+          description: not found
+        '401':
+          description: unauthorized
+  "/api/v1/user/playlists":
+    get:
+      summary: user playlists
+      tags:
+      - user_playlists
+      security:
+      - Bearer: []
+      parameters:
+      - name: includes[]
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          enum:
+          - user
+          - songs
+          - songs.author
+          - songs.album
+          - songs.genre
+        required: false
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - owned
+          - shared
+        required: false
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: successful
+          schema:
+            anyOf:
+            - "$ref": "#/definitions/public_playlists"
+            - {}
+  "/api/v1/users/{id}":
+    get:
+      summary: user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - user
+      parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+          schema:
+            "$ref": "#/definitions/user_response"
+        '401':
+          description: unauthorized
+        '404':
+          description: not found
+  "/api/v1/user/search_new_user":
+    get:
+      summary: search_new_user current_users
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - users
+      security:
+      - Bearer: []
+      parameters:
+      - name: email
+        in: query
+        description: Search parameter
+        schema:
+          type: string
+        required: false
+      - name: page
+        in: query
+        schema:
+          type: integer
+        required: false
+      responses:
+        '200':
+          description: successful
+          schema:
+            type: object
+            "$ref": "#/definitions/search_new_user"

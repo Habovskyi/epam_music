@@ -1,0 +1,64 @@
+# Cache is disabled due to low upload and download speed.
+# https://gitlab.com/gitlab-org/gitlab-runner/-/issues/1797 - Solution from here doesn't work for our project
+# https://gitlab.com/gitlab-org/gitlab/-/issues/211375
+
+stages:
+  - lint
+  - test
+  - deploy
+
+.base_db:
+  image: ruby:3.1.0
+  services:
+    - postgres:latest
+  variables:
+    POSTGRES_DB: epammusic_test
+    POSTGRES_USER: epammusic_postgresql
+    POSTGRES_PASSWORD: epammusic_postgresql
+    DB_USERNAME: epammusic_postgresql
+    DB_PASSWORD: epammusic_postgresql
+    DB_HOST: postgres
+    RAILS_ENV: test
+  before_script:
+    - mkdir -p $HOME/.docker
+    - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+    - bundle config set path 'vendor'
+    - bundle install -j $(nproc)
+    - echo "${MASTER_KEY}" > config/master.key
+    - echo "${TEST_KEY}" > config/credentials/test.key
+    - bundle exec rails db:setup --trace
+    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    - apt-get update -qy
+    - apt-get install -y nodejs
+    - apt-get install -y yarn
+    - yarn install --check-files
+    - yarn build
+
+linting:
+  extends: .base_db
+  stage: lint
+  script:
+    - bundle exec lefthook run pre-commit
+
+rspec:
+  extends: .base_db
+  stage: test
+  script:
+    - bundle exec rspec
+
+deploy:
+  image: ruby:3.1.0
+  environment: production
+  stage: deploy
+  only:
+    - main
+  script:
+    - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
+    - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
+    - apt-get update
+    - apt-get install -y heroku-toolbelt
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+    - heroku run rails db:migrate --exit-code --app $HEROKU_APP_NAME

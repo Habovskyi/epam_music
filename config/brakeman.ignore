@@ -1,0 +1,26 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "b58093fa070e2193256eb3c6d014679b30d32c02ce0ce804cd84beadd8c12a4c",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/most_friendly_users_query.rb",
+      "line": 7,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "User.select(:id, :username, :email, :first_name, :last_name, :playlists_created, \"count(users.id) friends_count\").joins(\"LEFT JOIN friendships f on users.id = f.user_from_id\\n                                          or users.id = f.user_to_id where status = #{Friendship.statuses[:accepted]}\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "MostFriendlyUsersQuery",
+        "method": "call"
+      },
+      "user_input": "Friendship.statuses[:accepted]",
+      "confidence": "High",
+      "note": ""
+    }
+  ],
+  "updated": "2022-04-28 15:58:09 +0300",
+  "brakeman_version": "5.2.2"
+}

@@ -1,0 +1,173 @@
+en:
+  activerecord:
+    attributes:
+      friendship:
+        base:
+          one: "Friendship"
+    errors:
+      image:
+        not_image: "File is not an image. Allowed types: %{allowed_types}"
+        too_big_dim: "File max dimensions allowed: %{dim}"
+        too_small_dim: "File min dimensions allowed: %{dim}"
+        too_big_size: "File max size allowed: %{max_size}"
+      models:
+        friendship:
+          attributes:
+            user_from:
+              other_than: "User can't make friend with himself"
+            base:
+              already_exists: "This friendship is already exists"
+        user:
+          attributes:
+            username:
+              invalid: "English letters and numbers allowed only"
+            email:
+              invalid: "Inappropriate email address"
+            first_name:
+              invalid: "Inappropriate name"
+            last_name:
+              invalid: "Inappropriate name"
+            password:
+              at_least_one_letter: "Password must contain at least one letter"
+              at_least_one_capital_letter: "Password must contain at least one capital letter"
+              at_least_one_non_alphabetical: "Password must contain at least one non alphabetical symbol"
+              allowed_symbols: 'Password allowed symbols are - "%{symbols}" numbers and english letters'
+              too_short: "The %{attribute} must be at least 5 characters long"
+              too_long: "The %{attribute} must be no more than 20 characters long"
+              blank: "The %{attribute} field must be filled"
+        playlist:
+          attributes:
+            title:
+              invalid: "English letters, numbers and whitespace are allowed"
+              too_short: "The %{attribute} must be at least 2 characters long"
+              too_long: "The %{attribute} must be no more than 20 characters long"
+              blank: "The %{attribute} field must be filled"
+            visibility:
+              cannot_be_modified: "Can't change playlist type from shared"
+        genre:
+          attributes:
+            name:
+              invalid: 'English letters, whitespace and \ are allowed only'
+              too_short: "The %{attribute} must be at least 2 characters long"
+              too_long: "The %{attribute} must be no more than 15 characters long"
+              taken: "%{attribute} already exists"
+              blank: "The %{attribute} must be filled"
+        author:
+          attributes:
+            nickname:
+              invalid: "English letters, numbers, whitespace and [,.-_+$&] are allowed"
+              too_short: "The %{attribute} must be at least 2 characters long"
+              too_long: "The %{attribute} must be no more than 40 characters long"
+              taken: "%{attribute} already exists"
+              blank: "The %{attribute} field must be filled"
+        album:
+          attributes:
+            title:
+              invalid: "English letters, numbers, whitespace and [?/._-] are allowed"
+              too_short: "The %{attribute} must be at least 1 characters long"
+              too_long: "The %{attribute} must be no more than 50 characters long"
+              blank: "The %{attribute} field must be filled"
+        song:
+          attributes:
+            title:
+              invalid: "English letters, numbers, whitespace and [-()&] are allowed"
+              too_short: "The %{attribute} must be at least 2 characters long"
+              too_long: "The %{attribute} must be no more than 40 characters long"
+              blank: "The %{attribute} field must be filled"
+              already_exists: "Title is already exist"
+            author_id:
+              blank: "The %{attribute} field must be filled"
+            genre_id:
+              too_long: "The %{attribute} must be no more than 20 characters long"
+              blank: "The %{attribute} field must be filled"
+        playlist_song:
+          attributes:
+            song:
+              taken: "The same song can be once in a playlist"
+        reaction:
+          attributes:
+            user_id:
+              blank: "The %{attribute} can't be blank."
+            playlist_id:
+              blank: "The %{attribute} can't be blank."
+            base:
+              already_exists: 'This reaction already exists.'
+              not_allowed_to_update: "This reaction already exists and can't be updated."
+        about: 
+          attributes:
+            body: 
+              blank: "can't be blank"
+  alert:
+    admin:
+      playlists:
+        featured_changed: 'The playlists featured have been changed.'
+  endpoints:
+    success:
+      model:
+        update: 'Successfully updated!'
+        create: 'Successfully created!'
+    errors:
+      client:
+        bad_refresh_token: "Refresh token is invalid"
+        unauthorized: "Unauthorized"
+        already_logged: 'User is already logged in'
+      home:
+        wrong_type_value: "Wrong type's parameter value"
+      model:
+        empty_params: 'There is nothing to update'
+  action_mailer:
+    users:
+      subjects:
+        achievement_notification: 'You have got a new achievement'
+      greeting: 'Hello %{username}! You have reach a new achievement'
+      got_achievement: 'Congratulations! You have created a %{playlists_created} playlists!'
+    friendships:
+      subjects:
+        invintation_mail: 'You have a new friendship request'
+        declined_email: 'Friend request declined'
+        accepted_email: 'Friend request accepted'
+      greeting: 'Dear, %{user}'
+      request_declined: 'Unfortunately, %{user} declined your friend request.'
+      request_accepted: 'Congratulations, %{user} accepted your friend request.'
+      request_created: 'Dear, %{user_to} you have been invited to friendship with %{user_from}'
+    statistic:
+      subjects:
+        send: 'Statistic for last %{time_period} on %{current_date}'
+      headers:
+        new_users: 'New users'
+        new_deleted_users: 'New deleted users'
+        new_playlists: 'New playlists'
+        new_deleted_playlists: 'New deleted playlists'
+        new_playlist_songs: 'New playlist songs'
+        new_friendships: 'New friendships'
+        new_accepted_friendships: 'New friends pairs'
+        new_songs: 'New songs'
+        new_genres: 'New genres'
+        new_authors: 'New authors'
+        total_users: 'Total users'
+        total_deleted_users: 'Total deleted users'
+        total_playlists: 'Total playlists'
+        total_songs: 'Total songs'
+        total_genres: 'Total genres'
+        total_authors: 'Total authors'
+  activemodel:
+    errors:
+      models:
+        friendship:
+          attributes:
+            user_to_id:
+              not_exist: 'The user, you are looking for does not exist'
+            base:
+              already_exists: 'This friendship already exists'
+        genre:
+          attributes:
+            name:
+              already_exists: 'Name is already exist'
+        author:
+          attributes:
+            nickname:
+              already_exists: 'Author is already exist'
+  admin:
+    resource:
+      author:
+        new: 'Enter Author name'

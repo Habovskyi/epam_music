@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      =I18n.t('action_mailer.friendships.greeting', user: @user_from.username)
+    %p
+      =I18n.t('action_mailer.friendships.request_declined', user: @user_to.username)

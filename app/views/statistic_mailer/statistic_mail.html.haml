@@ -1,0 +1,41 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    :css
+      .local_statistic{
+        float: left;
+        margin-right: 10px;
+      }
+      .positive, .negative{
+        overflow: hidden;
+      }
+      .positive{
+        color: #27CC70;;
+      }
+      .negative{
+        color: #CC3527;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      table td, table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #3C6566;
+        color: white;
+      }
+  %body
+    %table
+      - @statistic_presenter.statistic.each do |key, value|
+        %tr
+          %th
+            .table_header= I18n.t("action_mailer.statistic.headers.#{key}")
+          %td
+            .local_statistic= value
+            %div{class: @statistic_presenter.compared_value_div_class(key)}= @statistic_presenter.compared_values[key]

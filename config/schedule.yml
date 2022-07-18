@@ -1,0 +1,4 @@
+statistic_worker:
+  cron: "0 21 * * * * Europe/Kiev"
+  class: "ServiceWorkers::StatisticWorker"
+  description: "Worker to collect and send service statistics"
